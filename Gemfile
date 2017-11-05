@@ -26,6 +26,8 @@ source 'https://rubygems.org'
     gem 'rails-controller-testing'
   end
 
+ gem 'pry-rails', :group => :development
+  
  # Use Puma as the app server
  gem 'puma', '~> 3.0'
  # Use SCSS for stylesheets
