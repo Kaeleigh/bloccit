@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-
-  get 'welcome/about'
+  # #1 called resources method and pass it thry symbol thus create post routes for creating, updating, viewing and deleting
+  resources :posts
+  # #2 root view declares index, about route lets users vist about
+  get 'about' => 'welcome#about'
 
   root 'welcome#index'
 
