@@ -14,6 +14,7 @@ topics = Topic.all
  # #1 creates new Post with ! that raises errors if there's a problem
    Post.create!(
  # #2 creates random strings for title and body, RandomData class is not defined yet
+     topic: topics.sample,
      title:  RandomData.random_sentence,
      body:   RandomData.random_paragraph
    )
