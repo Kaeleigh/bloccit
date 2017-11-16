@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+
   resources :topics do
   # # called resources method and pass it thru symbol thus create post routes for creating, updating, viewing and deleting
     resources :posts, except: [:index]
+    resources :sponsored_posts
   end
   # # root view declares index, about route lets users vist about
   get 'about' => 'welcome#about'

@@ -19,10 +19,16 @@ module RandomData
     sentence = strings.join(" ")
     sentence.capitalize << "."
   end
-  # #8 random_word is defined, letters is an array 
+  # #8 random_word is defined, letters is an array
   def self.random_word
     letters = ('a'..'z').to_a
     letters.shuffle!
     letters[0,rand(3..8)].join
+  end
+  ## random_number is defined, numbers is an array yet joined together as integers
+  def self.random_number
+    numbers = (0..9).to_a
+    numbers.shuffle!
+    numbers[0,rand(1..3)].join.to_i
   end
 end

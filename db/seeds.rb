@@ -14,6 +14,7 @@ topics = Topic.all
  # #1 creates new Post with ! that raises errors if there's a problem
    Post.create!(
  # #2 creates random strings for title and body, RandomData class is not defined yet
+     topic: topics.sample,
      title:  RandomData.random_sentence,
      body:   RandomData.random_paragraph
    )
@@ -30,8 +31,18 @@ topics = Topic.all
   )
 end
 
+# Create SponsoredPosts
+50.times do
+  SponsoredPost.create!(
+    topic: topics.sample,
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: RandomData.random_number
+  )
+end
 
 puts "Seed finished"
+puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-puts "#{Topic.count} topics created"
+puts "#{SponsoredPost.count} sponsored posts created"
