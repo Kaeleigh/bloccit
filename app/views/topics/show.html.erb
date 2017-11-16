@@ -3,6 +3,7 @@
 <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success' %>
 <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
 <div class="row">
+  <!--Bootstrap split grid to 4 and 8 = 12 -->
   <div class="col-md-8">
     <p class="lead"><%= @topic.description %></p>
     <!-- #loop over each post belonging to a topic and display each post -->

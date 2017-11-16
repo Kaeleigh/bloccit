@@ -6,7 +6,7 @@ RSpec.describe PostsController, type: :controller do
   # # updated my_post to belong to my_topic
   let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
 
-  # index tests removed because they will be displayed on show view of topic
+  # index tests removed because posts use show view of topic
 
   # test for showing, creating and editing posts
   describe "GET show" do

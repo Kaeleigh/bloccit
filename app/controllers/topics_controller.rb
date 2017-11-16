@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  #methods to define controller actions
   def index
     @topics = Topic.all
   end

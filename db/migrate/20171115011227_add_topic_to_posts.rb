@@ -1,4 +1,5 @@
 class AddTopicToPosts < ActiveRecord::Migration[5.1]
+  #creates association between posts and topic
   def change
     #generator creates a migration that adds a topic_id column to posts table
     add_column :posts, :topic_id, :integer

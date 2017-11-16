@@ -20,13 +20,6 @@ ActiveRecord::Schema.define(version: 20171115011227) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "advertisments", force: :cascade do |t|
-    t.string "title"
-    t.text "copy"
-    t.integer "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :topics do
   # # called resources method and pass it thru symbol thus create post routes for creating, updating, viewing and deleting
+  # does not get index view
     resources :posts, except: [:index]
   end
   # # root view declares index, about route lets users vist about

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  # variables topic, post and comment to each model
   let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
   let(:comment) { Comment.create!(body: "Comment Body", post: post) }

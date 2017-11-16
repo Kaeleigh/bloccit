@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TopicsController, type: :controller do
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence,
     description: RandomData.random_paragraph) }
-
+    # tests for views
    describe "GET index" do
      it "returns http success" do
        get :index
