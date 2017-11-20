@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   belongs_to :topic
   # comments dependent on a post's existence, makes sure all comments are deleted when post is deleted.
   has_many :comments, dependent: :destroy
-
+  # validates title is at least 5 and body is at least 20
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
