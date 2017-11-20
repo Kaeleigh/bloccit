@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # does not get index view
     resources :posts, except: [:index]
   end
+
+  # routes for new and create actions, only hash prevents unnecessary routes created
+  resources :users, only: [:new, :create]
   # # root view declares index, about route lets users vist about
   get 'about' => 'welcome#about'
 
