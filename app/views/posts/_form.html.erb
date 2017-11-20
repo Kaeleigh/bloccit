@@ -6,7 +6,7 @@
   <!--pluralize method multiplies the error if there is more than one error -->
   <h4><%= pluralize(post.errors.count, "error") %>.</h4>
   <ul>
-    <% post.error.full_messages.each do |msg| %>
+    <% post.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
     <% end %>
   </ul>
