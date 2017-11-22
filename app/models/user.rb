@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   #register inline callback
-  before_save { self.email = email.downcase if email.present? }
-  before_save :name_formatting
+  before_save :downcase_email, :name_formatting
 
  # #validation func ensures name is present, max and min length
-   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
+  validates :name, length: { minimum: 1, maximum: 100 }, presence: true
  # #validates password
   validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
   validates :password, length: { minimum: 6 }, allow_blank: true
@@ -17,14 +16,16 @@ class User < ApplicationRecord
  # #sets and authenticates password
    has_secure_password
 
+   private
+
+   def downcase_email
+     self.email = email.downcase if email.present?
+   end
+
    def name_formatting
-     if name
-       formatted_name = []
-       name.split.each do |letter|
-         formatted_name << letter.capitalize
-       end
-       self.name = formatted_name.join(" ")
+     if name.present?
+       self.name = name.split.map { |letter| letter.capitalize }.join(" ")
      end
    end
-# ends the class   
+# ends the class
 end
