@@ -23,5 +23,14 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def confirm
+    # corresponding attributes set from params hash
+    @user = User.new
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+  end
 #ends class
 end
