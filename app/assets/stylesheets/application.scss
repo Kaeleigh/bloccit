@@ -15,4 +15,17 @@
  */
 
  @import "bootstrap-sprockets";
-  @import "bootstrap";
+ @import "bootstrap";
+
+ .container:before {
+   margin-top: 5px;
+ }
+
+ .nav-tabs{
+   margin-bottom: 30px;
+   padding-bottom: 5px;
+ }
+
+ .avatar-image{
+   border-radius: 50%;
+ }
