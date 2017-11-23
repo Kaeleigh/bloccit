@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   # routes for new and create actions, only hash prevents unnecessary routes created
   resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create, :destroy]
   # # root view declares index, about route lets users vist about
   get 'about' => 'welcome#about'
 

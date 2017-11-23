@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       # if saved successfully flash message and send user to root path
       flash[:notice] = "Welcome to Bloccit #{@user.name}!"
+      create_session(@user)
       redirect_to root_path
     else
       # flash error message and send user to new view
