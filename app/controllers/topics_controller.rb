@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
-  # filter, redirect guests 
+  # filter, redirect guests
   before_action :require_sign_in, except: [:index, :show]
-  #filter checks role of signed in user, redirectd to index
+  #filter checks role of signed in user, if not redirectd to index
   before_action :authorize_user, except: [:index, :show]
   #methods to define controller actions
   def index

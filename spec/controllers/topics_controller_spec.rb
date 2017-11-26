@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 include RandomData
 include SessionsHelper
 
@@ -149,8 +150,7 @@ RSpec.describe TopicsController, type: :controller do
       end
     end
   end
-
-
+  
     # admin user tests
     context "admin user" do
       before do

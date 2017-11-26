@@ -14,7 +14,6 @@ RSpec.describe PostsController, type: :controller do
 
   # # context organize tests based on state of an object
   context "guest" do
-    # # show test defined
     describe "GET show" do
       it "returns http success" do
         get :show, params: { topic_id: my_topic.id, id: my_post.id }
@@ -32,11 +31,9 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    # # tests for CRUD actions
     describe "GET new" do
       it "returns http redirect" do
         get :new, params: { topic_id: my_topic.id }
-        # # guests to be redirected if they try to create, update or delete post
         expect(response).to redirect_to(new_session_path)
       end
     end
@@ -60,7 +57,7 @@ RSpec.describe PostsController, type: :controller do
         new_title = RandomData.random_sentence
         new_body = RandomData.random_paragraph
 
-        put :update, params: { topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body } }
+        put :update, params: { topic_id: my_topic.id, id: my_post.id, post: { title: new_title, body: new_body } }
         expect(response).to redirect_to(new_session_path)
       end
     end
@@ -71,70 +68,65 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to(new_session_path)
       end
     end
-    # closes context
   end
 
   context "member user doing CRUD on a post they don't own" do
     before do
-      create_session(my_user)
+      create_session(other_user)
     end
 
-    # test for showing, creating and editing posts
     describe "GET show" do
       it "returns http success" do
-        # parameters passed to params hash
-        get :show, params: { topic_id: my_topic, id: my_post.id }
+        get :show, params: { topic_id: my_topic.id, id: my_post.id }
         expect(response).to have_http_status(:success)
       end
+
       it "renders the #show view" do
-        # # return show view using render_template
-        get :show, params: { topic_id: my_topic, id: my_post.id }
+        get :show, params: { topic_id: my_topic.id, id: my_post.id }
         expect(response).to render_template :show
       end
 
       it "assigns my_post to @post" do
-        get :show, params: { topic_id: my_topic, id: my_post.id }
-        # #expect post to equal var my_post
+        get :show, params: { topic_id: my_topic.id, id: my_post.id }
         expect(assigns(:post)).to eq(my_post)
       end
     end
 
-    # create new posts
     describe "GET new" do
       it "returns http success" do
-        get :new, params: { topic_id: my_topic }
+        get :new, params: { topic_id: my_topic.id }
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #new view" do
-        get :new, params: { topic_id: my_topic }
+        get :new, params: { topic_id: my_topic.id }
         expect(response).to render_template :new
       end
 
       it "instantiates @post" do
-        get :new, params: { topic_id: my_topic }
+        get :new, params: { topic_id: my_topic.id }
         expect(assigns(:post)).not_to be_nil
       end
     end
 
-    # what actual new posts should return
     describe "POST create" do
       it "increases the number of Post by 1" do
         expect{ post :create, params: { topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } } }.to change(Post,:count).by(1)
       end
+
       it "assigns the new post to @post" do
         post :create, params: { topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } }
         expect(assigns(:post)).to eq Post.last
       end
+
       it "redirects to the new post" do
         post :create, params: { topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } }
         expect(response).to redirect_to [my_topic, Post.last]
       end
     end
 
-    # edit posts
     describe "GET edit" do
-      it "returns http success" do
+      it "returns http redirect" do
         get :edit, params: { topic_id: my_topic.id, id: my_post.id }
         expect(response).to redirect_to([my_topic, my_post])
       end
@@ -156,8 +148,9 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to([my_topic, my_post])
       end
     end
-  # closes 2nd context
   end
+
+
   context "member user doing CRUD on a post they own" do
     before do
       create_session(my_user)
@@ -268,7 +261,6 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to my_topic
       end
     end
-  # ends 3rd context
   end
 
   context "admin user doing CRUD on a post they don't own" do
@@ -382,7 +374,6 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to my_topic
       end
     end
-  # ends 4th context
   end
 
   # ends the RSpec PostsController

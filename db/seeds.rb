@@ -45,12 +45,20 @@ topics = Topic.all
   )
 end
 
-# add one user that will be used as tester
-user = User.first
-user.update_attributes!(
-  email: 'hilllucy4@gmail.com',
-  password: 'helloworld'
-)
+# Create an admin user
+ admin = User.create!(
+   name:     'Admin User',
+   email:    'admin@example.com',
+   password: 'helloworld',
+   role:     'admin'
+ )
+
+# Create a member
+ member = User.create!(
+   name:     'Member User',
+   email:    'member@example.com',
+   password: 'helloworld'
+ )
 
 
 puts "Seed finished"

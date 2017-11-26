@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   # before_action filter calls method before each action expect show
   before_action :require_sign_in, except: :show
+  # filter method calls method except for show, new and create actions
   before_action :authorize_user, except: [:show, :new, :create]
   #methods to define controller actions
   def show
@@ -74,7 +75,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     unless current_user == post.user || current_user.admin?
       flash[:alert] = "You must be an admin to do that."
-      redirect_to[post.topic, post]
+      redirect_to [post.topic, post]
     end
   end
   # ends the class PostsController

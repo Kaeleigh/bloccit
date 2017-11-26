@@ -16,5 +16,6 @@ class User < ApplicationRecord
 
  # #sets and authenticates password
    has_secure_password
+   # enum roles added
    enum role: [:member, :admin]
 end

@@ -42,6 +42,7 @@ RSpec.describe User, type: :model do
     end
   end
 
+  # test roles 
   describe "roles" do
     # #users assigned member role by default
     it "is member by default" do
