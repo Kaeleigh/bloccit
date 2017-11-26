@@ -3,6 +3,7 @@ class User < ApplicationRecord
   #register inline callback
   before_save { self.email = email.downcase if email.present? }
   before_save { self.role ||= :member }
+  before_save { self.role ||= :moderator }
  # #validation func ensures name is present, max and min length
    validates :name, length: { minimum: 1, maximum: 100 }, presence: true
  # #validates password
@@ -17,5 +18,5 @@ class User < ApplicationRecord
  # #sets and authenticates password
    has_secure_password
    # enum roles added
-   enum role: [:member, :admin]
+   enum role: [:member, :admin, :moderator]
 end
