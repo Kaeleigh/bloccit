@@ -42,11 +42,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # test roles 
+  # test roles
   describe "roles" do
     # #users assigned member role by default
     it "is member by default" do
-      expect(user.role).to eql("member")
+      expect(user.role).to eq("member")
     end
 
     # #test member users
