@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   #register inline callback
   before_save { self.email = email.downcase if email.present? }
-
+  before_save { self.role ||= :member }
  # #validation func ensures name is present, max and min length
    validates :name, length: { minimum: 1, maximum: 100 }, presence: true
  # #validates password
@@ -16,4 +16,5 @@ class User < ApplicationRecord
 
  # #sets and authenticates password
    has_secure_password
+   enum role: [:member, :admin]
 end

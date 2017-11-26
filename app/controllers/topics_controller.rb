@@ -1,4 +1,8 @@
 class TopicsController < ApplicationController
+  # filter, redirect guests 
+  before_action :require_sign_in, except: [:index, :show]
+  #filter checks role of signed in user, redirectd to index
+  before_action :authorize_user, except: [:index, :show]
   #methods to define controller actions
   def index
     @topics = Topic.all
@@ -55,6 +59,14 @@ class TopicsController < ApplicationController
   private
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
+  end
+
+  # method defined
+  def authorize_user
+    unless current_user.admin?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to topics_path
+    end
   end
 
   #ends the class
