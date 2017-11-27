@@ -39,6 +39,7 @@ topics = Topic.all
  # # loop runs 100 times
 100.times do
   Comment.create!(
+    user: users.sample,
 # # called sample on array returned by Post.all
     post: posts.sample,
     body: RandomData.random_paragraph

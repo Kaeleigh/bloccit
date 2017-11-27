@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
 
+  # only used for specific routes
+  resources :posts, only: [] do
+      # route for comments with create and destroy actoon
+      resources :comments, only: [:create, :destroy]
+  end
   # routes for new and create actions, only hash prevents unnecessary routes created
   resources :users, only: [:new, :create]
 
