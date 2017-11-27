@@ -10,20 +10,7 @@
     <p class="lead"><%= @topic.description %></p>
     <!-- #loop over each post belonging to a topic and display each post -->
     <% @topic.posts.each do |post| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <!--# refactor how link to individual posts -->
-          <%= link_to post.title, topic_post_path(@topic, post) %>
-        </h4>
-        <!-- # add submission and comment details for each post in show -->
-        <small>
-             submitted <%= time_ago_in_words(post.created_at) %> ago by
-             <%= post.user.name %> <br>
-             <%= post.comments.count %> Comments
-        </small>
-      </div>
-    </div>
+      <%= render partial: 'posts/post', locals: { post: post } %>
     <% end %>
   </div>
   <% if current_user %>
