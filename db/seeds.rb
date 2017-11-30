@@ -24,14 +24,18 @@ topics = Topic.all
  # Create Posts
  50.times do
  # # creates new Post with ! that raises errors if there's a problem
-   Post.create!(
- # # creates random strings for title and body, RandomData class is not defined yet
-    # samples of user created
-     user: users.sample,
-     topic: topics.sample,
-     title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph
-   )
+ post = Post.create!(
+   user:   users.sample,
+   topic:  topics.sample,
+   title:  RandomData.random_sentence,
+   body:   RandomData.random_paragraph
+ )
+
+# #update time of created post
+ post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+# #create 1-5 votes for each post, randomly up or down vote
+ rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
+
  end
  posts = Post.all
 
@@ -67,3 +71,4 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Vote.count} votes created"

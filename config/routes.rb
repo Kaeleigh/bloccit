@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :posts, only: [] do
       # route for comments with create and destroy actoon
       resources :comments, only: [:create, :destroy]
+      post '/up-vote' => 'votes#up_vote', as: :up_vote
+      post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
   # routes for new and create actions, only hash prevents unnecessary routes created
   resources :users, only: [:new, :create]
