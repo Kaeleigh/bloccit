@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   # comments dependent on a post's existence, makes sure all comments are deleted when post is deleted.
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   default_scope {order('rank DESC') }
   # validates title is at least 5 and body is at least 20
