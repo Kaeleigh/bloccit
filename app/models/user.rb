@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post, dependent: :destroy
 
   #register inline callback
   before_save { self.email = email.downcase if email.present? }
@@ -32,5 +33,5 @@ class User < ApplicationRecord
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
-  # closes class  
+  # closes class
 end
