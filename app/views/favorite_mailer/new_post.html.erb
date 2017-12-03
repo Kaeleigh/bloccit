@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+   </head>
+   <body>
+     <h1>You are now follwing your post, "<%= @post.title %>"</h1>
+     <small>
+       Posted on <%= @post.created_at.strftime("%A, %B %d, %Y") %>
+     </small>
+     <p>
+       <h3>You will receive an email notification anytime a new comment is made on your post. If you do not to receive such updates,
+       unfavorite your <%= link_to "post here", topic_post_url(@post.topic, @post) %>.<h3>
+     </p>
+     <p>
+       <%= link_to "View Your Post On Bloccit", topic_post_url(@post.topic, @post) %>
+     </p>
+   </body>
+ </html>
