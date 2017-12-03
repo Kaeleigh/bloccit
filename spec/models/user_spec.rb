@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
+  let(:user) { create(:user) }
 
   # associates user to post
   it { is_expected.to have_many(:posts) }
@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
 
   describe "attributes" do
     it "should have name and email attributes" do
-      expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
+      expect(user).to have_attributes(name: user.name, email: user.email)
     end
 
     # # users respond to role
@@ -82,8 +82,8 @@ RSpec.describe User, type: :model do
 
 # #testing for value that should be invalid
  describe "invalid user" do
-  let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
-  let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
+  let(:user_with_invalid_name) { build(:user, name: "") }
+  let(:user_with_invalid_email) { build(:user, email: "") }
 
   it "should be an invalid user due to blank name" do
     expect(user_with_invalid_name).to_not be_valid
@@ -110,6 +110,18 @@ RSpec.describe User, type: :model do
        favorite = user.favorites.where(post: @post).create
  # # expect return favorite we created
        expect(user.favorite_for(@post)).to eq(favorite)
+     end
+   end
+
+   describe ".avatar_url" do
+ # #build user, pass email to override generated one
+     let(:known_user) { create(:user, email: "blochead@bloc.io") }
+
+     it "returns the proper Gravatar url for a known email entity" do
+ # #expected string set
+       expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
+ # #expect method to return specific url above
+       expect(known_user.avatar_url(48)).to eq(expected_gravatar)
      end
    end
 

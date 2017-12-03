@@ -13,8 +13,8 @@ Rails.application.routes.draw do
       post '/up-vote' => 'votes#up_vote', as: :up_vote
       post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
-  # routes for new and create actions, only hash prevents unnecessary routes created
-  resources :users, only: [:new, :create]
+  # routes for new, show create actions, only hash prevents unnecessary routes created
+  resources :users, only: [:new, :create, :show]
 
   resources :sessions, only: [:new, :create, :destroy]
   # # root view declares index, about route lets users vist about

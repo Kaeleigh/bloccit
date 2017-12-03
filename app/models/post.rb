@@ -8,6 +8,10 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   default_scope {order('rank DESC') }
+
+  # lambda ensures user is present/signed in
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
+  
   # validates title is at least 5 and body is at least 20
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
