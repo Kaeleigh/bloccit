@@ -23,22 +23,22 @@
 
 <!--display user's posts and comments with partials-->
  <h2>Posts</h2>
- <% if @user.posts.any? %>
-    <%= render @user.posts %>
- <%= else %>
+ <% if users_has_no_post?(@user) %>
     <p><%= @user.name %> has not submitted any posts... yet.</p>
+ <% else %>
+    <%= render @user.posts %>
  <% end %>
 
  <h2>Comments</h2>
- <% if @user.comments.any? %>
-    <%= render @user.comments %>
- <%= else %>
+ <% if users_has_no_comment?(@user) %>
     <p><%= @user.name %> has not submitted any comments... yet.</p>
+ <% else %>
+    <%= render @user.comments %>
  <% end %>
 
   <h2>Favorites</h2>
-  <% if @user.favorites.any? %>
-     <%= render @favorite_posts %>
-  <%= else %>
+  <% if users_has_no_favorite?(@user) %>
      <p><%= @user.name %> has not favorited any posts... yet.</p>
+  <% else %>
+     <%= render @favorite_posts %>
   <% end %>
